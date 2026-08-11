@@ -1,0 +1,13 @@
+node_modules/
+dist/
+coverage/
+playwright-report/
+test-results/
+artifacts/
+*.log
+*.crx
+*.pem
+.DS_Store
+
+# Local real-page structure samples may contain account or personal data.
+fixtures/boss/sample-job*.md
