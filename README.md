@@ -79,6 +79,8 @@ Side Panel → Service Worker → optional BOSS access + scripting
 
 扩展没有后端、遥测、广告、远程代码或云同步。它不采集账号凭据、Cookie、聊天记录、招聘者个人信息。清空操作只删除 JobCollector 自己的本地 storage key。公开发布前仍需重新核验目标网站规则、浏览器商店政策和 fixture 敏感信息。
 
+公开发布资料见 [隐私政策](docs/privacy-policy.md) 和 [Chrome Web Store 中英文文案](docs/chrome-web-store-listing.md)。
+
 安全问题与开源边界见 [SECURITY.md](SECURITY.md)，贡献流程见 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ## 版本与课程引用
