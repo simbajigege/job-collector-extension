@@ -41,39 +41,6 @@ button {
   padding: 24px 20px 20px;
 }
 
-.brand-block {
-  margin-bottom: 20px;
-}
-
-.brand-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.brand-mark {
-  display: grid;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 auto;
-  place-items: center;
-  border-radius: 10px;
-  background: var(--color-ink-soft);
-  color: #fafafa;
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-}
-
-h1 {
-  margin: 0;
-  font-size: 30px;
-  font-weight: 600;
-  letter-spacing: -0.025em;
-  line-height: 1.2;
-  text-wrap: balance;
-}
-
 .primary-action,
 .secondary-action,
 .danger-action {

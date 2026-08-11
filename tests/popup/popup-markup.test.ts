@@ -9,8 +9,13 @@ describe('side panel markup', () => {
     readFileSync(resolve(import.meta.dirname, '../../popup.html'), 'utf8'),
   ).window.document;
 
-  it('has one clear heading and the three specified action buttons', () => {
-    expect(popup.querySelectorAll('h1')).toHaveLength(1);
+  it('starts with the collect action and has the three specified buttons', () => {
+    expect(popup.querySelector('.brand-block')).toBeNull();
+    expect(popup.querySelector('.brand-mark')).toBeNull();
+    expect(popup.querySelector('h1')).toBeNull();
+    expect(popup.querySelector('main')?.getAttribute('aria-label')).toBe(
+      'JobCollector 职位收集器',
+    );
     expect(
       [...popup.querySelectorAll('button')].map((button) => button.textContent?.trim()),
     ).toEqual(['收集当前职位', '下载 CSV', '清空']);

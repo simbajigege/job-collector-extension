@@ -18,6 +18,8 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "npm run build && playwright test",
+    "render:icons": "node scripts/render-extension-icons.mjs",
+    "generate:store-assets": "npm run build && node scripts/generate-store-assets.mjs",
     "check": "npm run typecheck && npm run format:check && npm run lint && npm test -- --run && npm run build",
     "package": "npm run build && node scripts/package-extension.mjs"
   },

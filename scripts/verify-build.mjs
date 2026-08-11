@@ -44,9 +44,34 @@ if ('default_popup' in (manifest.action ?? {})) {
   throw new Error('The toolbar action must open the side panel, not a popup.');
 }
 
+const expectedIcons = {
+  16: 'icons/icon-16.png',
+  32: 'icons/icon-32.png',
+  48: 'icons/icon-48.png',
+  128: 'icons/icon-128.png',
+};
+const expectedActionIcons = {
+  16: expectedIcons[16],
+  32: expectedIcons[32],
+};
+if (JSON.stringify(manifest.icons) !== JSON.stringify(expectedIcons)) {
+  throw new Error(`Unexpected extension icons: ${JSON.stringify(manifest.icons)}.`);
+}
+if (
+  JSON.stringify(manifest.action?.default_icon) !== JSON.stringify(expectedActionIcons)
+) {
+  throw new Error(
+    `Unexpected toolbar icons: ${JSON.stringify(manifest.action?.default_icon)}.`,
+  );
+}
+
 const requiredFiles = [
   'manifest.json',
   'popup.html',
+  'icons/icon-16.png',
+  'icons/icon-32.png',
+  'icons/icon-48.png',
+  'icons/icon-128.png',
   'assets/service-worker.js',
   'assets/collect-current-job.js',
 ];

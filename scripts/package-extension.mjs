@@ -25,7 +25,9 @@ async function listFiles(directory, prefix = '') {
   return files.sort();
 }
 
-const files = await listFiles(distDirectory);
+const files = (await listFiles(distDirectory)).filter(
+  (file) => !/(?:^|\/)\.DS_Store$/u.test(file),
+);
 const forbidden = files.filter((file) =>
   /(?:^|\/)(?:fixtures?|tests?|coverage|playwright-report)(?:\/|$)|\.map$/u.test(file),
 );
@@ -35,7 +37,7 @@ if (forbidden.length > 0) {
 
 await mkdir(artifactsDirectory, {recursive: true});
 await rm(artifactPath, {force: true});
-const zip = spawnSync('zip', ['-X', '-q', '-r', artifactPath, '.'], {
+const zip = spawnSync('zip', ['-X', '-q', artifactPath, ...files], {
   cwd: distDirectory,
   encoding: 'utf8',
 });
