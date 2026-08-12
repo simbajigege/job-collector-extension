@@ -1,28 +1,27 @@
 {
-  "name": "job-collector-brand-linear",
-  "label": "JobCollector 品牌线性图标",
-  "preamble": "A restrained technical-document icon: one open white collection box with a black outline, the visible label JOBox, and one blue downward flow arrow. Flat front-facing geometry, clear structure, no outer app tile, no decorative flourish, no texture, no gradient, and no shadow.",
+  "name": "job-collector-brand-tile",
+  "label": "JOB 黑白品牌图标",
+  "preamble": "A high-contrast black square app tile with a minimal white intake slot above an oversized heavy white JOB label. Flat front-facing geometry, immediate small-size recognition, no arrows, no container outline, no decorative flourish, no texture, no gradient, and no shadow.",
   "palette": [
-    "#FFFFFF",
     "#0A0A0A",
-    "#0348ED"
+    "#FFFFFF"
   ],
   "cutout": "floodfill",
   "thresh": 30,
   "construction": {
-    "grid": "32-unit keyline; 26-unit live area; 3-unit safe padding; optical centering for both 16px toolbar and 128px store use",
-    "stroke": "2 units for the open box and directional arrow on a 32-unit grid; rounded caps and joins",
-    "corner_radius": "3-unit lower box corners and fully rounded open terminals",
-    "angles": "orthogonal geometry; the arrow uses only 45-degree diagonals",
-    "detail_budget": "one core idea with three parts: open collection box, JOBox label, incoming arrow",
-    "fill_rule": "pure-white flat fills with near-black outlines; no tonal or decorative fills",
-    "color_rule": "near-black carries the silhouette; blue appears only on the small incoming arrow and stays visually subordinate",
-    "shared_parts": "reuse the same rounded terminal and lower-corner geometry throughout",
+    "grid": "32-unit keyline; full-bleed square tile; optical centering for both 16px toolbar and 128px store use",
+    "stroke": null,
+    "corner_radius": "1-unit app tile radius and subtle intake-slot radius",
+    "angles": "orthogonal geometry only",
+    "detail_budget": "one core idea with three parts: black app tile, white intake slot, JOB label",
+    "fill_rule": "two flat solid fills only; no outlines or tonal decoration",
+    "color_rule": "near-black carries the full tile; white is reserved for the intake slot and JOB label",
+    "shared_parts": "use restrained rectangular geometry with minimal rounding",
     "perspective": "flat front-facing",
     "shadow": "none",
-    "motif": "a blue downward arrow entering an open box labeled JOBox, expressing collection through direction rather than decoration",
-    "weight_hierarchy": "the near-black briefcase silhouette remains heaviest; the blue arrow is smaller and occupies less area"
+    "motif": "a short white intake slot above an oversized JOB label",
+    "weight_hierarchy": "the 900-weight JOB label is primary, the intake slot is secondary, and the black tile is the stable ground"
   },
   "fits": "Chrome extension toolbar icon, extension package icon, and 128x128 Chrome Web Store icon.",
-  "notes": "The SVG master semantically distills the approved docs/design/job-collector-icon-source.png reference. All shipped PNG sizes are rendered from the 128px SVG master. The reusable generation prompt is docs/design/job-collector.prompt.md. Derived from docs/design/STYLE_DNA.md."
+  "notes": "The SVG master semantically distills the approved docs/design/job-collector-icon-source.png reference. All shipped PNG sizes are rendered from the 128px SVG master. The reusable generation prompt is docs/design/job-collector.prompt.md."
 }

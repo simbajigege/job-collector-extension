@@ -1,51 +1,43 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="job-collector-icon-title job-collector-icon-desc">
-  <title id="job-collector-icon-title">JOBox 职位收集图标</title>
-  <desc id="job-collector-icon-desc">一支蓝色向下箭头进入标有 JOBox 的开放收集箱，表示把职位保存到 JOBox。</desc>
+  <title id="job-collector-icon-title">JOB 职位收集图标</title>
+  <desc id="job-collector-icon-desc">黑色圆角方块内，上方是一条白色收入口，下方是醒目的白色粗体 JOB。</desc>
 
   <style>
-    .job-collector-icon__box {
+    .job-collector-icon__tile {
+      fill: #0a0a0a;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .job-collector-icon__slot,
+    .job-collector-icon__label {
       fill: #ffffff;
-      stroke: #0a0a0a;
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
       vector-effect: non-scaling-stroke;
     }
 
     .job-collector-icon__label {
-      fill: #0a0a0a;
       font-family: Geist, Inter, Arial, sans-serif;
-      font-size: 27px;
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
-
-    .job-collector-icon__flow {
-      fill: none;
-      stroke: #0348ed;
-      stroke-width: 8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      vector-effect: non-scaling-stroke;
+      font-size: 62px;
+      font-weight: 900;
+      letter-spacing: -2px;
     }
   </style>
 
-  <g class="job-collector-icon__object" data-boundary="job-box">
-    <path
-      class="job-collector-icon__box"
-      d="M31 39H23C17.5 39 13 43.5 13 49V104C13 112.3 19.7 119 28 119H100C108.3 119 115 112.3 115 104V49C115 43.5 110.5 39 105 39H97"
-    />
+  <g class="job-collector-icon__object" data-boundary="app-tile">
+    <rect class="job-collector-icon__tile" width="128" height="128" rx="4" />
+  </g>
+
+  <g class="job-collector-icon__object" data-boundary="intake-slot">
+    <rect class="job-collector-icon__slot" x="40" y="19" width="48" height="14" rx="1.5" />
+  </g>
+
+  <g class="job-collector-icon__object" data-boundary="job-label">
     <text
       class="job-collector-icon__label"
       x="64"
-      y="91"
+      y="106"
       text-anchor="middle"
-      textLength="74"
+      textLength="118"
       lengthAdjust="spacingAndGlyphs"
-    >JOBox</text>
-  </g>
-
-  <g class="job-collector-icon__relation" data-relation="flow">
-    <path class="job-collector-icon__flow" d="M64 10V52M46 36L64 54L82 36" />
+    >JOB</text>
   </g>
 </svg>
