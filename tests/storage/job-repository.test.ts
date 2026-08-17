@@ -70,6 +70,29 @@ describe('job repository', () => {
     await expect(repository.count()).resolves.toBe(1);
   });
 
+  it('removes one record by its dedupe identity', async () => {
+    const first = record();
+    const second = record({sourceJobId: 'job-002', jobTitle: '数据产品经理'});
+    await repository.upsert(first);
+    await repository.upsert(second);
+
+    await expect(repository.remove(first)).resolves.toBe(true);
+    await expect(repository.list()).resolves.toEqual([second]);
+    await expect(repository.remove(first)).resolves.toBe(false);
+  });
+
+  it('updates and preserves a note when the same job is collected again', async () => {
+    const original = record();
+    await repository.upsert(original);
+
+    await expect(repository.updateNote(original, '已投递，等待反馈')).resolves.toBe(true);
+    await repository.upsert(record({salary: '30-45K'}));
+
+    await expect(repository.list()).resolves.toEqual([
+      expect.objectContaining({salary: '30-45K', note: '已投递，等待反馈'}),
+    ]);
+  });
+
   it('lists records in collected-at order and clears all records', async () => {
     await repository.upsert(
       record({sourceJobId: 'later', collectedAt: '2026-08-10T10:00:00.000Z'}),

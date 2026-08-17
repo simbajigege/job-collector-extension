@@ -68,6 +68,19 @@ async function handleRequest(request: ExtensionRequest): Promise<ExtensionRespon
       return {ok: true, type: 'COUNT_RESULT', count: await repository.count()};
     case 'EXPORT_JOBS':
       return {ok: true, type: 'EXPORT_RESULT', records: await repository.list()};
+    case 'UPDATE_JOB_NOTE':
+      return {
+        ok: true,
+        type: 'UPDATE_NOTE_RESULT',
+        updated: await repository.updateNote(request, request.note),
+      };
+    case 'DELETE_JOB':
+      return {
+        ok: true,
+        type: 'DELETE_RESULT',
+        removed: await repository.remove(request),
+        count: await repository.count(),
+      };
     case 'CLEAR_ALL':
       await repository.clear();
       return {ok: true, type: 'CLEAR_RESULT', count: 0};

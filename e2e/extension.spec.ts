@@ -87,7 +87,7 @@ test('extracts one local fixture, persists, updates, exports and clears', async 
       getManifest: () => ({version: '0.1.0'}),
     };
   });
-  await targetPage.route('https://www.zhipin.com/**', (route) =>
+  await context.route('https://www.zhipin.com/**', (route) =>
     route.fulfill({
       status: 200,
       contentType: 'text/html; charset=utf-8',
@@ -149,12 +149,41 @@ test('extracts one local fixture, persists, updates, exports and clears', async 
   await expect(persistedPanel.locator('#job-count')).toHaveText('已收集 1 个职位');
   await persistedPanel.screenshot({path: '/private/tmp/jobcollector-side-panel.png'});
 
-  const downloadPromise = persistedPanel.waitForEvent('download');
   const collectedJob = persistedPanel.locator('#job-list tr');
   await expect(collectedJob).toHaveCount(1);
   await expect(collectedJob).toContainText('星河创新科技');
   await expect(collectedJob).toContainText('AI 产品架构师');
+  await expect(collectedJob).toContainText('30-45K');
 
+  const jobLink = persistedPanel.getByRole('link', {name: 'AI 产品架构师'});
+  const deleteButton = persistedPanel.getByRole('button', {
+    name: '删除',
+    exact: true,
+  });
+  await expect(jobLink).toHaveAttribute('href', updatedRecord.sourceUrl);
+  await expect(deleteButton.locator('svg')).toHaveCount(1);
+
+  const viewedJobPagePromise = context.waitForEvent('page');
+  await jobLink.click();
+  const viewedJobPage = await viewedJobPagePromise;
+  const viewedUrl = new URL(viewedJobPage.url());
+  const expectedUrl = new URL(updatedRecord.sourceUrl);
+  expect(viewedUrl.origin).toBe(expectedUrl.origin);
+  expect(
+    viewedUrl.pathname === expectedUrl.pathname
+      ? viewedUrl.pathname
+      : viewedUrl.searchParams.get('callbackUrl'),
+  ).toBe(expectedUrl.pathname);
+  await viewedJobPage.close();
+
+  const noteInput = persistedPanel.getByRole('textbox', {
+    name: 'AI 产品架构师的备注',
+  });
+  await noteInput.fill('已投递，周五跟进');
+  await noteInput.press('Enter');
+  await expect(noteInput).toHaveAttribute('title', '备注已自动保存');
+
+  const downloadPromise = persistedPanel.waitForEvent('download');
   await persistedPanel.getByRole('button', {name: '下载 CSV'}).click();
   const download = await downloadPromise;
   expect(download.suggestedFilename()).toMatch(
@@ -163,6 +192,18 @@ test('extracts one local fixture, persists, updates, exports and clears', async 
   const csv = await readFile(await download.path(), 'utf8');
   expect(csv.startsWith('\uFEFF"schema_version"')).toBe(true);
   expect(csv).toContain('"30-45K"');
+  expect(csv).toContain('"已投递，周五跟进"');
+
+  await deleteButton.click();
+  await expect(persistedPanel.locator('#job-count')).toHaveText('已收集 0 个职位');
+  await expect(persistedPanel.locator('#job-list .empty-list')).toBeVisible();
+
+  await serviceWorker.evaluate(async (record) => {
+    await chrome.storage.local.set({
+      'jobCollector.jobs.v1': {'boss:synthetic-current-001': record},
+    });
+  }, updatedRecord);
+  await persistedPanel.reload();
 
   persistedPanel.once('dialog', (dialog) => dialog.accept());
   await persistedPanel.getByRole('button', {name: '清空'}).click();

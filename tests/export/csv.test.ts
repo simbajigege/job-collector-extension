@@ -31,8 +31,15 @@ describe('serializeJobsToCsv', () => {
 
     expect(csv.startsWith(`\uFEFF${expectedHeader}\r\n`)).toBe(true);
     expect(csv.endsWith('\r\n')).toBe(true);
+    expect(csv).toContain('"salary","note","location"');
     expect(csv).toContain('"负责产品规划。\r\n推进评测与迭代。"');
     expect(csv).not.toMatch(/(?<!\r)\n/u);
+  });
+
+  it('exports an editable job note', () => {
+    const csv = serializeJobsToCsv([record({note: '已投递，周五跟进'})]);
+
+    expect(csv).toContain('"25-40K","已投递，周五跟进","北京"');
   });
 
   it('escapes commas and double quotes according to RFC 4180', () => {

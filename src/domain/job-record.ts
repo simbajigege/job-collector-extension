@@ -16,6 +16,7 @@ export interface JobRecordDraft {
 
 export interface JobRecord extends JobRecordDraft {
   schemaVersion: typeof SCHEMA_VERSION;
+  note?: string;
   missingFields: string[];
   collectedAt: string;
   collectorVersion: string;

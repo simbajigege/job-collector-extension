@@ -29,10 +29,10 @@ describe('side panel markup', () => {
     expect(popup.querySelector('#job-count')?.textContent).toContain('0');
   });
 
-  it('provides a three-column company and job list', () => {
+  it('provides a company and job list with row actions', () => {
     expect(
       [...popup.querySelectorAll('th')].map((heading) => heading.textContent?.trim()),
-    ).toEqual(['#', '公司', '职位']);
+    ).toEqual(['#', '公司', '职位', '薪资', '备注', '操作']);
     expect(popup.querySelector('#job-list .empty-list')?.textContent).toContain(
       '暂无已收集职位',
     );

@@ -7,6 +7,7 @@
   --color-mid-gray: #737373;
   --color-hairline: #e5e5e5;
   --color-emphasis: #ff3700;
+  --color-link: #0348ed;
   --font-geist:
     Geist, Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
@@ -184,7 +185,135 @@ th:first-child,
 }
 
 th:nth-child(2) {
-  width: 40%;
+  width: 19%;
+}
+
+th:nth-child(3) {
+  width: 23%;
+}
+
+th:nth-child(4),
+.salary-cell {
+  width: 74px;
+}
+
+th:nth-child(5) {
+  width: 25%;
+}
+
+th:last-child,
+.row-actions-cell {
+  width: 44px;
+  padding-right: 8px;
+}
+
+.row-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 4px;
+}
+
+.row-action {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 6px;
+  background: var(--color-surface-alt);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    opacity 180ms ease,
+    transform 180ms ease;
+}
+
+.row-action svg {
+  width: 15px;
+  height: 15px;
+}
+
+.job-link {
+  display: block;
+  overflow: hidden;
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 35%, transparent);
+  text-underline-offset: 2px;
+  text-overflow: ellipsis;
+  transition: text-decoration-color 180ms ease;
+}
+
+.job-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.job-link:focus-visible {
+  border-radius: 2px;
+  outline: 1px solid var(--color-link);
+  outline-offset: 2px;
+}
+
+.salary-cell {
+  font-variant-numeric: tabular-nums;
+}
+
+.note-cell {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.note-input {
+  width: 100%;
+  height: 28px;
+  min-width: 0;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  outline: 0;
+  background: var(--color-surface-alt);
+  color: var(--color-ink);
+  font: inherit;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.note-input::placeholder {
+  color: var(--color-mid-gray);
+}
+
+.note-input:hover,
+.note-input:focus {
+  border-color: var(--color-hairline);
+  background: var(--color-paper);
+}
+
+.note-input:focus {
+  border-color: var(--color-ink);
+}
+
+.note-input[data-saving='true'] {
+  opacity: 0.55;
+}
+
+.note-input[aria-invalid='true'] {
+  border-color: var(--color-emphasis);
+}
+
+.row-action-delete {
+  color: var(--color-emphasis);
+}
+
+.row-action:hover:not(:disabled) {
+  background: #eeeeee;
+}
+
+.row-action:active:not(:disabled) {
+  transform: translateY(1px);
 }
 
 tbody tr:last-child td {
