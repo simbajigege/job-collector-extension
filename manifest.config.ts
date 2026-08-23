@@ -2,7 +2,7 @@ export const manifest = {
   manifest_version: 3,
   name: 'JobCollector',
   description: 'Collect the current job posting locally and export a stable CSV.',
-  version: '0.1.1',
+  version: '0.1.2',
   minimum_chrome_version: '114',
   permissions: ['activeTab', 'scripting', 'sidePanel', 'storage'],
   optional_host_permissions: ['https://zhipin.com/*', 'https://www.zhipin.com/*'],
